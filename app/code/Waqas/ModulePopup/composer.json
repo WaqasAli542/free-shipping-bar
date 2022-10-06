@@ -1,0 +1,20 @@
+{
+    "name": "waqas/module-popup",
+    "version": "1.0.4",
+    "description": "Waqas Dynamic Popup Module for Magento 2",
+    "type": "magento2-module",
+    "require": {
+        "magento/module-newsletter": "100.3.*||100.4.*"
+    },
+    "license": [
+        "Open Software License (OSL)"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Waqas\\Popup\\": ""
+        }
+    }
+}

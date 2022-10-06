@@ -1,0 +1,133 @@
+<?php
+/**
+ * @var $block \Waqas\Popup\Block\Popup
+ * @var $viewModel \Waqas\Popup\ViewModel\PopUpConfig
+ */
+$viewModel = $block->getViewModel();
+$configHelper = $viewModel->getConfig();
+$popupContentType = $configHelper->getPopupContentType();
+$popupWhereToShow = $configHelper->getPopupWhereToShow();
+$imagePath = "none";
+$newsletterCls = "";
+if ($popupContentType == 'newsletter_sign_up') {
+    $imagePath = $block->getImageUrl();
+}
+?>
+<?php if ($configHelper->isEnabled()): ?>
+    <?php if (($popupWhereToShow == "homepage" && $block->getFullActionName() === "cms_index_index")
+        || ($popupWhereToShow == "allpage")): ?>
+        <?php if ($configHelper->getShowNewsletter() && $popupContentType == "newsletter_sign_up"): ?>
+    <div id="newsletter-model" class="newsletter-form" style="display:none;">
+    <?php else: ?>
+    <div id="newsletter-model" style="display:none;">
+    <?php endif; ?>
+    <div class="popup_message">
+        <?php if ($popupContentType == 'custom'): ?>
+            <?php if (!empty($configHelper->getPopupHeading())): ?>
+            <div id="popup-heading" class="popup-heading">
+                <?= /* @noEscape */ $block->getWyswingContent($configHelper->getPopupHeading()); ?>
+            </div>
+            <?php endif; ?>
+            <?php if (!empty($configHelper->getPopupMessage())): ?>
+            <div id="popup-form-content" class="popup-form-content">
+                <div id="popup-text">
+                    <?= /* @noEscape */ $block->getWyswingContent($configHelper->getPopupMessage()); ?>
+                </div>
+            </div>
+            <?php endif; ?>
+        <?php endif; ?>
+        <?php if ($popupContentType == "newsletter_sign_up"): ?>
+            <?php if ($configHelper->getShowNewsletter()): ?>
+            <div class="waqas-block newsletter">
+                <div class="waqas-content">
+                    <form class="form subscribe"
+                        novalidate
+                        action="<?= $block->escapeUrl($block->getFormActionUrl()) ?>"
+                        method="post"
+                        data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+                        id="waqas-newsletter-validate-detail">
+                        <div class="field newsletter">
+                            <div class="control">
+                                <label for="newsletter">
+                                    <span class="label">
+                                        <?= $block->escapeHtml(__($configHelper->getNewsletterLabelText())) ?>
+                                    </span>
+                                    <input name="email" type="email" id="newsletter"
+                                       placeholder="<?= $block->escapeHtml($configHelper->getNewsletterPlaceholder())?>"
+                                       data-mage-init='{"mage/trim-input":{}}'
+                                       data-validate="{required:true, 'validate-email':true}"
+                                    />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <button class="action popup-subscribe primary"
+                                    title="<?= $block->escapeHtmlAttr(__($configHelper->getNewsletterButtonText())) ?>"
+                                    type="submit"
+                                    aria-label="Subscribe">
+                                <span><?= $block->escapeHtml(__($configHelper->getNewsletterButtonText())) ?></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <?php endif; ?>
+        <?php endif; ?>
+        <?php if ($popupContentType == "cms_block"): ?>
+        <div id="popup-form-content">
+            <?= $block->getLayout()->createBlock(\Magento\Cms\Block\Block::class)
+            ->setBlockId($block->getCmsBlock($configHelper->getPopupCmsBlock())
+                ->getIdentifier())->toHtml(); ?>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
+    <?php endif; ?>
+<?php endif; ?>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Waqas_Popup/js/modal_popup": {
+            "isEnabled": "<?= $block->escapeJs($configHelper->isEnabled()) ?>",
+            "setcontent": "<?= $block->escapeJs($configHelper->getPopupContentType()) ?>",
+            "isFooterEnabled": "<?= $block->escapeJs($configHelper->isFooterEnabled()) ?>",
+            "buttonBgColor": "<?= /* @noEscape */ $configHelper->getButtonBgColor() ?>",
+            "buttonFontColor": "<?= /* @noEscape */ $configHelper->getButtonFontColor() ?>",
+            "buttonText": "<?= $block->escapeJs(
+                !empty($configHelper->getButtonText())?$configHelper->getButtonText():__('Close')
+            ) ?>",
+            "popupShowTime": "<?= $block->escapeJs($configHelper->getPopupShowTime()) ?>",
+            "popupCookieExp": "<?= $block->escapeJs($configHelper->getPopupCookieExpire()) ?>"
+        }
+    }
+}
+</script>
+<?php if ($configHelper->getShowNewsletter()): ?>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Customer/js/block-submit-on-send": {
+                "formId": "waqas-newsletter-validate-detail"
+            }
+        }
+    }
+</script>
+<?php endif; ?>
+<style type="text/css">
+.modal-popup.waqas-popup .modal-inner-wrap {
+    max-width: <?= /* @noEscape */ $configHelper->getPopupWidth(); ?>;
+    background-image: url(<?= /* @noEscape */ $imagePath; ?>);
+    height: <?= /* @noEscape */ $configHelper->getPopupWidth(); ?>;
+}
+.modal-popup.waqas-popup .modal-footer .waqas-popup-btn-action
+{
+    background: <?= /* @noEscape */ $configHelper->getButtonBgColor(); ?>;
+    color: <?= /* @noEscape */ $configHelper->getButtonFontColor() ?>;
+    border: 1px solid <?= /* @noEscape */ $configHelper->getButtonBgColor(); ?>;
+}
+.waqas-popup .action.popup-subscribe {
+    background: <?= /* @noEscape */ $configHelper->getNewsletterButtonColor(); ?>;
+    border: 1px solid <?= /* @noEscape */ $configHelper->getNewsletterButtonColor();
+    ; ?>;
+}
+</style>
