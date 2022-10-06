@@ -1,0 +1,54 @@
+<?php
+/** @var $block \Waqas\FreeShippingBar\Block\Entity\FreeShippingBar */
+?>
+<?php
+$isModuleEnable = $block->getConfig('Waqas_free_shipping_bar/general/enable');
+$isFreeShippingBarAvailable = null;
+if ($isModuleEnable):
+    $layoutPosition = $block->getData('position') ? $block->getData('position') : null;
+    $entityId = $block->getData('entity_id') ? $block->getData('entity_id') : null;
+    if ($layoutPosition || $entityId):
+        if ($entityId):
+            $barData = $block->getFreeShippingBarByEntityId($entityId);
+            $layoutPosition = 'insert_snippet';
+        elseif ($layoutPosition):
+            $barData = $block->getFreeShippingBar();
+        endif;
+        if ($barData):
+            if ($barData['bar_layout_position'] === $layoutPosition):
+                $isFreeShippingBarAvailable = 1;
+            endif;
+        endif;
+    endif;
+endif;
+?>
+<?php if ($isFreeShippingBarAvailable): ?>
+    <div class="Waqas-free-shipping-bar-goal-message"
+         style="background-color: <?= /* @noEscape */ $barData['bar_background_color']?>; font-size: <?= /* @noEscape */ $barData['bar_font_size'].'px'?>">
+        <a <?= /* @noEscape */ $barData['is_clickable'] ? 'href='.$barData['bar_link_url'] : null ?>
+            <?= /* @noEscape */ $barData['is_clickable'] ? ($barData['is_link_open_in_new_page'] ?  'target=_blank' : 'target=_self') : null ?>
+            style="color: <?= /* @noEscape */ $barData['bar_text_color']?>">
+            <div data-bind="scope: 'free-shipping-scope'">
+                <p data-bind="html: goalMessage"></p>
+            </div>
+        </a>
+    </div>
+    <script type="text/x-magento-init">
+    {
+         "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "free-shipping-scope": {
+                        "component": "Waqas_FreeShippingBar/js/free_shipping_bar",
+                        "goal": "<?= /* @noEscape */ $barData['goal'] ?>",
+                        "currency": "<?= /* @noEscape */ $block->getCurrentCurrencySymbol() ?>",
+                        "goalColor": "<?= /* @noEscape */ $barData['goal_text_color'] ?>",
+                        "initialGoalMessage": "<?= /* @noEscape */ $barData['initial_goal_message'] ?>",
+                        "achieveGoalMessage": "<?= /* @noEscape */ $barData['achieve_goal_message'] ?>"
+                    }
+                }
+            }
+        }
+    }
+    </script>
+<?php endif ?>

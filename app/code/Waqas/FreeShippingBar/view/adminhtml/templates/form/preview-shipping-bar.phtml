@@ -1,0 +1,28 @@
+<?php
+/** @var $block \Waqas\FreeShippingBar\Block\Adminhtml\Entity\Edit\Tab\WhatToDisplay */
+
+$goalMessages = [];
+$goalMessages = $block->getGoalMessages();
+?>
+<fieldset class="fieldset admin__fieldset" id="Waqas_free_shipping_bar_entity_preview_template_fieldset">
+    <legend class="admin__legend legend">
+        <span><?= $block->escapeHtml(__('Preview Template')) ?></span>
+    </legend><br/>
+</fieldset>
+<?php foreach ($goalMessages as $messageKey => $messageValue) { ?>
+    <div class="Waqas-free-shipping-bar">
+        <a>
+            <div>
+                <p class="<?= /* @noEscape */ $messageKey?>"><?= /* @noEscape */ $messageValue?></p>
+            </div>
+        </a>
+    </div>
+<?php } ?>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Waqas_FreeShippingBar/js/jscolor": {},
+         "Waqas_FreeShippingBar/js/preview-shipping-bar": {}
+    }
+}
+</script>

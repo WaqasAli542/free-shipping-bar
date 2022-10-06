@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="Waqas" translate="label" sortOrder="500">
+            <label>Waqas Extensions</label>
+        </tab>
+        <section id="Waqas_free_shipping_bar" translate="label" sortOrder="10" showInStore="1" showInWebsite="1" showInDefault="1">
+            <class>separator-top</class>
+            <label>Free Shipping Bar</label>
+            <tab>Waqas</tab>
+            <resource>Waqas_FreeShippingBar::config_free_shipping_bar</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Free Shipping Bar</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

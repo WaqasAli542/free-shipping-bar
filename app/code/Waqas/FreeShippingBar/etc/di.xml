@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Waqas\FreeShippingBar\Api\Data\EntityInterface" type="Waqas\FreeShippingBar\Model\Entity"/>
+    <virtualType name="ShippingBarGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Waqas\FreeShippingBar\Model\Resource\Entity\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">ShippingBarGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ShippingBarGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Waqas\FreeShippingBar\Model\ResourceModel\Entity\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">Waqas_free_shipping_bar</argument>
+            <argument name="resourceModel" xsi:type="string">Waqas\FreeShippingBar\Model\ResourceModel\Entity</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="Waqas_free_shipping_bar_entity_listing_data_source" xsi:type="string">Waqas\FreeShippingBar\Model\ResourceModel\Entity\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Waqas\FreeShippingBar\Model\ResourceModel\Entity\AssociatedEntityMap" type="Magento\Framework\DataObject">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="store" xsi:type="array">
+                    <item name="associations_table" xsi:type="string">Waqas_free_shipping_bar_store</item>
+                    <item name="bar_entity_id_field" xsi:type="string">entity_id</item>
+                    <item name="entity_id_field" xsi:type="string">store_id</item>
+                </item>
+                <item name="customer_group" xsi:type="array">
+                    <item name="associations_table" xsi:type="string">Waqas_free_shipping_bar_customer_group</item>
+                    <item name="bar_entity_id_field" xsi:type="string">entity_id</item>
+                    <item name="entity_id_field" xsi:type="string">customer_group_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Waqas\FreeShippingBar\Api\Data\EntityInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">Waqas_free_shipping_bar</item>
+                    <item name="identifierField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\Operation\AttributePool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="freeShippingBar" xsi:type="array">
+                    <item name="Waqas\FreeShippingBar\Api\Data\EntityInterface" xsi:type="array">
+                        <item name="read" xsi:type="string">Waqas\FreeShippingBar\Model\ResourceModel\Entity\Relation\ReadHandler</item>
+                        <item name="create" xsi:type="string">Waqas\FreeShippingBar\Model\ResourceModel\Entity\Relation\SaveHandler</item>
+                        <item name="update" xsi:type="string">Waqas\FreeShippingBar\Model\ResourceModel\Entity\Relation\SaveHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Waqas\FreeShippingBar\Api\Data\EntityInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Shipping\Model\Shipping">
+        <plugin name="Waqas-free-shipping-bar-insertFreeShippingRates" type="Waqas\FreeShippingBar\Plugin\Model\Shipping\InsertFreeShippingRates" sortOrder="10" disabled="false"  />
+    </type>
+</config>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Waqas\FreeShippingBar\Block\Adminhtml\Entity\Edit" name="waqas_free_shipping_bar_entity_edit_content"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Waqas\FreeShippingBar\Block\Adminhtml\Entity\Edit\Tabs" name="waqas_free_shipping_bar_entity_edit_tabs" >
+                <block class="Waqas\FreeShippingBar\Block\Adminhtml\Entity\Edit\Tab\Main" name="waqas_free_shipping_bar_entity_edit_tab_main" as="main" />
+                <block class="Waqas\FreeShippingBar\Block\Adminhtml\Entity\Edit\Tab\WhatToDisplay" name="waqas_free_shipping_bar_entity_edit_tab_what_to_display" as="what_to_display" />
+                <block class="Waqas\FreeShippingBar\Block\Adminhtml\Entity\Edit\Tab\WhereToDisplay" name="waqas_free_shipping_bar_entity_edit_tab_where_to_display" as="where_to_display" />
+            </block>
+        </referenceContainer>
+    </body>
+</page>

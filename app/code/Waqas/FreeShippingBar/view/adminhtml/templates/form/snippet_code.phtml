@@ -1,0 +1,24 @@
+<?php
+/** @var $block \Waqas\FreeShippingBar\Block\Adminhtml\Entity\Edit\Tab\WhereToDisplay */
+$entityId = $block->getEntityId() ? $block->getEntityId() : null;
+if ($entityId):
+    ?>
+<fieldset class="fieldset admin__fieldset" id="Waqas_free_shipping_bar_entity_snippet_code_fieldset">
+    <legend class="admin__legend legend">
+        <span><?= $block->escapeHtml(__('Snippet Code')) ?></span>
+    </legend><br/>
+    <div>
+        <div class="admin__field-control control">
+            <div class="Waqas-free-shipping-bar-control-value">
+                <p>Use the following code to show the shipping bar block in any place you want:</p>
+                <strong>CMS Page/Static Block</strong>
+                <pre class="Waqas-free-shipping-bar-snippet-code"><code>&#123;&#123;block class="Waqas\FreeShippingBar\Block\Entity\FreeShippingBar" template="Waqas_FreeShippingBar::free_shipping_bar.phtml" entity_id="<?= /* @noEscape */ $entityId ?>"&#125;&#125;</code></pre>
+                <strong>Template .phtml file</strong>
+                <pre class="Waqas-free-shipping-bar-snippet-code"><code>&lt;?= $block-&gt;getLayout()-&gt;createBlock("Waqas\FreeShippingBar\Block\Entity\FreeShippingBar")-&gt;setTemplate("free_shipping_bar.phtml")-&gt;setEntityId("<?= /* @noEscape */ $entityId ?>")-&gt;toHtml();?&gt;</code></pre>
+                <strong>Layout File</strong>
+                <pre class="Waqas-free-shipping-bar-snippet-code"><code>&lt;block class="Waqas\FreeShippingBar\Block\Entity\FreeShippingBar" name="Waqas.free-shipping.bar" template="Waqas_FreeShippingBar::free_shipping_bar.phtml"&gt;<br/>&nbsp;&nbsp;&lt;arguments&gt; <br/>&nbsp;&nbsp;&nbsp;&nbsp;&lt;argument name="entity_id" xsi:type="string"><?= /* @noEscape */ $entityId ?>&lt;/argument&gt;<br/>&nbsp;&nbsp;&lt;/arguments&gt;<br/>&lt;/block&gt;</code></pre>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<?php endif; ?>

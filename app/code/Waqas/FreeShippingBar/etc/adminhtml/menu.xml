@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Waqas_FreeShippingBar::free_shipping_bar_management"
+             title="Free Shipping Bar"
+             translate="title"
+             action="Waqas_free_shipping_bar/entity"
+             module="Waqas_FreeShippingBar"
+             sortOrder="50"
+             resource="Waqas_FreeShippingBar::free_shipping_bar_management"
+             dependsOnConfig="Waqas_free_shipping_bar/general/enable"/>
+    </menu>
+</config>

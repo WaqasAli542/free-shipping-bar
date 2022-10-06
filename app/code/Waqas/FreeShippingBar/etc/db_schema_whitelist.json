@@ -1,0 +1,62 @@
+{
+    "Waqas_free_shipping_bar": {
+        "column": {
+            "entity_id": true,
+            "name": true,
+            "from_date": true,
+            "to_date": true,
+            "goal": true,
+            "initial_goal_message": true,
+            "achieve_goal_message": true,
+            "is_clickable": true,
+            "bar_link_url": true,
+            "is_link_open_in_new_page": true,
+            "bar_background_color": true,
+            "bar_text_color": true,
+            "goal_text_color": true,
+            "bar_font_size": true,
+            "bar_layout_position": true,
+            "is_active": true,
+            "sort_order": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "Waqas_FREE_SHIPPING_BAR_IS_ACTIVE": true,
+            "Waqas_FREE_SHIPPING_BAR_SORT_ORDER": true,
+            "Waqas_FREE_SHIPPING_BAR_FROM_DATE": true,
+            "Waqas_FREE_SHIPPING_BAR_TO_DATE": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "Waqas_free_shipping_bar_store": {
+        "column": {
+            "entity_id": true,
+            "store_id": true
+        },
+        "index": {
+            "Waqas_FREE_SHIPPING_BAR_STORE_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "Waqas_FREE_SHIPPING_BAR_STORE_ENTITY_ID_Waqas_FREE_SHIPPING_BAR_ENTITY_ID": true,
+            "Waqas_FREE_SHIPPING_BAR_STORE_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "Waqas_free_shipping_bar_customer_group": {
+        "column": {
+            "entity_id": true,
+            "customer_group_id": true
+        },
+        "index": {
+            "Waqas_FREE_SHIPPING_BAR_CUSTOMER_GROUP_CUSTOMER_GROUP_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "Waqas_FREE_SHIPPING_BAR_CUSTOMER_GROUP_ENTITY_ID_Waqas_FREE_SHIPPING_BAR_ENTITY_ID": true,
+            "Waqas_FREE_SHIPPING_BAR_CSTR_GROUP_CSTR_GROUP_ID_CSTR_GROUP_CSTR_GROUP_ID": true
+        }
+    }
+}

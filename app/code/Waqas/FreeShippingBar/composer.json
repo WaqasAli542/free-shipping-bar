@@ -1,0 +1,18 @@
+{
+    "name": "waqas/magento-2-free-shipping-bar-extension",
+    "description": "waqas Free Shipping Bar Extension for Magento 2",
+    "type": "magento2-module",
+    "version": "1.3.0",
+    "license": "OSL-3.0",
+    "require": {
+        "php": "~7.1.0|~7.2.0|~7.3.0|~7.4.0|^8.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Waqas\\FreeShippingBar\\": ""
+        }
+    }
+}
